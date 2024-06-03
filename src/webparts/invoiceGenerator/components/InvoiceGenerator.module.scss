@@ -284,21 +284,40 @@ $neutralColor: "[theme: neutralPrimary, default: #323130]";
 }
 
 /* InvoiceGenerator.module.scss */
-.invoiceGenerator {
-  /* styles */
-}
-.itemsContainer {
-  /* styles */
-}
-.itemsTable {
-  /* styles */
-}
-.itemsTableHeader {
-  /* styles */
-}
+// .invoiceGenerator {
+//   /* styles */
+// }
+// .itemsContainer {
+//   /* styles */
+// }
+// .itemsTable {
+//   /* styles */
+// }
+// .itemsTableHeader {
+//   /* styles */
+// }
+// .invoiceItemRow {
+//   /* styles */
+// }
+// .addItem {
+//   /* styles */
+// }
 .invoiceItemRow {
-  /* styles */
-}
-.addItem {
-  /* styles */
+  background-color: #f5f5f5; // Change the background color as needed
+  border-bottom: 1px solid #ccc; // Add a border to separate rows
+  padding: 10px; // Adjust the padding as needed
+
+  &:hover {
+    background-color: #eaeaea; // Change the background color on hover as needed
+  }
+
+ .itemDescription,
+ .itemQuantity,
+ .itemPrice,
+ .itemTotal {
+    flex: 1;
+    text-align: center;
+    padding: 10px;
+    box-sizing: border-box;
+  }
 }
