@@ -1,0 +1,13 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "react-invoice-generator-2019-client-side-solution",
+    "id": "cc3daeac-55f8-4912-9d79-1918b935d74d",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "skipFeatureDeployment": true
+  },
+  "paths": {
+    "zippedPackage": "solution/react-invoice-generator-2019.sppkg"
+  }
+}
