@@ -11,6 +11,9 @@ import * as strings from 'InvoiceGeneratorWebPartStrings';
 import InvoiceGenerator from './components/InvoiceGenerator';
 import { IInvoiceGeneratorProps } from './components/IInvoiceGeneratorProps';
 
+
+
+
 export interface IInvoiceGeneratorWebPartProps {
   description: string;
 }
@@ -20,9 +23,9 @@ export default class InvoiceGeneratorWebPart extends BaseClientSideWebPart<IInvo
   public render(): void {
     const element: React.ReactElement<IInvoiceGeneratorProps > = React.createElement(
       InvoiceGenerator,
-      {
-        description: this.properties.description
-      }
+      // {
+      //   description: this.properties.description
+      // }
     );
 
     ReactDom.render(element, this.domElement);
@@ -32,9 +35,7 @@ export default class InvoiceGeneratorWebPart extends BaseClientSideWebPart<IInvo
     ReactDom.unmountComponentAtNode(this.domElement);
   }
 
-  protected get dataVersion(): Version {
-    return Version.parse('1.0');
-  }
+//  protected dataVersion: Version = Version.parse('1.0');
 
   protected getPropertyPaneConfiguration(): IPropertyPaneConfiguration {
     return {

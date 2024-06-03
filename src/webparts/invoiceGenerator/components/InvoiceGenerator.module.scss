@@ -1,74 +1,304 @@
-@import '~@microsoft/sp-office-ui-fabric-core/dist/sass/SPFabricCore.scss';
+ @import '~@microsoft/sp-office-ui-fabric-core/dist/sass/SPFabricCore.scss';
+
+ // \\\\\\\                  DEFAULT ///////////////
+
+// .invoiceGenerator {
+//   .container {
+//     max-width: 700px;
+//     margin: 0px auto;
+//     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 25px 50px 0 rgba(0, 0, 0, 0.1);
+//   }
+
+//   .row {
+//     @include ms-Grid-row;
+//     @include ms-fontColor-white;
+//     background-color: $ms-color-themeDark;
+//     padding: 20px;
+//   }
+
+//   .column {
+//     @include ms-Grid-col;
+//     @include ms-lg10;
+//     @include ms-xl8;
+//     @include ms-xlPush2;
+//     @include ms-lgPush1;
+//   }
+
+//   .title {
+//     @include ms-font-xl;
+//     @include ms-fontColor-white;
+//   }
+
+//   .subTitle {
+//     @include ms-font-l;
+//     @include ms-fontColor-white;
+//   }
+
+//   .description {
+//     @include ms-font-l;
+//     @include ms-fontColor-white;
+//   }
+
+//   .button {
+//     // Our button
+//     text-decoration: none;
+//     height: 32px;
+
+//     // Primary Button
+//     min-width: 80px;
+//     background-color: $ms-color-themePrimary;
+//     border-color: $ms-color-themePrimary;
+//     color: $ms-color-white;
+
+//     // Basic Button
+//     outline: transparent;
+//     position: relative;
+//     font-family: "Segoe UI WestEuropean","Segoe UI",-apple-system,BlinkMacSystemFont,Roboto,"Helvetica Neue",sans-serif;
+//     -webkit-font-smoothing: antialiased;
+//     font-size: $ms-font-size-m;
+//     font-weight: $ms-font-weight-regular;
+//     border-width: 0;
+//     text-align: center;
+//     cursor: pointer;
+//     display: inline-block;
+//     padding: 0 16px;
+
+//     .label {
+//       font-weight: $ms-font-weight-semibold;
+//       font-size: $ms-font-size-m;
+//       height: 32px;
+//       line-height: 32px;
+//       margin: 0 4px;
+//       vertical-align: top;
+//       display: inline-block;
+//     }
+//   }
+// }
+
+$primaryColor: "[theme: themePrimary, default: #0078d4]";
+$neutralColor: "[theme: neutralPrimary, default: #323130]";
 
 .invoiceGenerator {
-  .container {
-    max-width: 700px;
-    margin: 0px auto;
-    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 25px 50px 0 rgba(0, 0, 0, 0.1);
-  }
-
-  .row {
-    @include ms-Grid-row;
-    @include ms-fontColor-white;
-    background-color: $ms-color-themeDark;
-    padding: 20px;
-  }
-
-  .column {
-    @include ms-Grid-col;
-    @include ms-lg10;
-    @include ms-xl8;
-    @include ms-xlPush2;
-    @include ms-lgPush1;
-  }
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #ccc;
+  padding: 1rem;
 
   .title {
-    @include ms-font-xl;
-    @include ms-fontColor-white;
-  }
-
-  .subTitle {
-    @include ms-font-l;
-    @include ms-fontColor-white;
-  }
-
-  .description {
-    @include ms-font-l;
-    @include ms-fontColor-white;
-  }
-
-  .button {
-    // Our button
-    text-decoration: none;
-    height: 32px;
-
-    // Primary Button
-    min-width: 80px;
-    background-color: $ms-color-themePrimary;
-    border-color: $ms-color-themePrimary;
-    color: $ms-color-white;
-
-    // Basic Button
-    outline: transparent;
-    position: relative;
-    font-family: "Segoe UI WestEuropean","Segoe UI",-apple-system,BlinkMacSystemFont,Roboto,"Helvetica Neue",sans-serif;
-    -webkit-font-smoothing: antialiased;
-    font-size: $ms-font-size-m;
-    font-weight: $ms-font-weight-regular;
-    border-width: 0;
+    margin-bottom: 1.5rem;
+    font-size: 30px;
     text-align: center;
-    cursor: pointer;
     display: inline-block;
-    padding: 0 16px;
+    margin-right: 300px;
+    
+  }
 
-    .label {
-      font-weight: $ms-font-weight-semibold;
-      font-size: $ms-font-size-m;
-      height: 32px;
-      line-height: 32px;
-      margin: 0 4px;
-      vertical-align: top;
-      display: inline-block;
+  .header {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+  }
+
+  .invoiceSelect {
+    display: inline-block;
+    vertical-align: top;
+    margin-left: 20px;
+    display: flex;
+    margin-left: auto;
+    justify-content: center;
+    align-items: center;
+    background-color: $primaryColor;
+    color: #fff;
+    padding: 8px 16px;
+    border-radius: 3px;
+    margin-bottom: 50px;
+    &:hover {
+      background-color: $primaryColor;
     }
   }
+
+  .itemsContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .itemsTable {
+    border-radius: 5px;
+    width: 100%;
+    max-width: 800px;
+    margin-bottom: 2.5rem;
+    padding: 0px 80px;
+  }
+
+  .itemsTableHeader,
+  .itemRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .itemDescription,
+  .itemQuantity,
+  .itemPrice,
+  .itemTotal {
+    flex: 1;
+    text-align: center;
+    padding: 10px;
+    box-sizing: border-box;
+  }
+
+  .itemsTableHeader {
+    background-color: $neutralColor;
+    color: #fff;
+    font-weight: bold;
+    padding: 2px 40px 2px 0px;
+  }
+
+  .itemsTableBody {
+    background-color: #fff;
+    flex: 1;
+    width: 100%;
+  }
+
+  .selectedItem {
+    background-color: #f5f5f5;
+  }
+
+  .itemsTableFooter {
+    color: #fff;
+    font-weight: bold;
+  }
+
+  .footerButtons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 1rem;
+  }
+
+  .footerButton {
+    background-color: $primaryColor;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+
+    &:hover {
+      background-color: "[theme: themeSecondary]";
+    }
+  }
+
+  .deleteButton {
+    background-color: #f44336;
+    color: white;
+    border: none;
+    padding: 5px 8px;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 3px;
+    margin-left: 0.5rem;
+
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+
+  .companyLogo {
+    max-width: 200px;
+    margin-bottom: 20px;
+    margin-right: 130px;
+  }
+  
+
+  .fullWidthPlusButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: $primaryColor;
+    padding: 0.5rem;
+
+    border-radius: 0.25rem;
+    margin-bottom: 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  
+    &:hover {
+      background-color: "[theme: themeSecondary, default: #005a9e]";
+    }
+  
+    i {
+      margin-right: 5px;
+    }
+  }
+
+  .submitButton {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: $primaryColor;
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+    text-transform: uppercase;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+  
+    &:hover {
+      background-color: "[theme: themeSecondary]";
+    }
+  }
+
+  .addItem {
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 0.5rem;
+
+    .inputWrapper {
+      margin-right: 0.5rem;
+
+      input {
+        padding: 5px 10px;
+        font-size: 12px;
+      }
+    }
+
+    .selectWrapper {
+      margin-right: 0.5rem;
+      flex: 1;
+
+      select {
+        width: 120px;
+        padding: 8px;
+        font-size: 16px;
+      }
+    }
+  }
+}
+
+/* InvoiceGenerator.module.scss */
+.invoiceGenerator {
+  /* styles */
+}
+.itemsContainer {
+  /* styles */
+}
+.itemsTable {
+  /* styles */
+}
+.itemsTableHeader {
+  /* styles */
+}
+.invoiceItemRow {
+  /* styles */
+}
+.addItem {
+  /* styles */
 }
