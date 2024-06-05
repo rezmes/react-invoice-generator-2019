@@ -23,9 +23,10 @@ export default class InvoiceGeneratorWebPart extends BaseClientSideWebPart<IInvo
   public render(): void {
     const element: React.ReactElement<IInvoiceGeneratorProps > = React.createElement(
       InvoiceGenerator,
-      // {
-      //   description: this.properties.description
-      // }
+      {
+        description: this.properties.description,
+        contex: this.context
+      }
     );
 
     ReactDom.render(element, this.domElement);
