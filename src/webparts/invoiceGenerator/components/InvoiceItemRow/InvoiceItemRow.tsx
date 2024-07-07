@@ -11,7 +11,7 @@ export interface IInvoiceItemRowProps {
 
 export interface IInvoiceItemRowState {}
 
-class InvoiceItemRow extends React.Component<IInvoiceItemRowProps, IInvoiceItemRowState> {
+export class InvoiceItemRow extends React.Component<IInvoiceItemRowProps, IInvoiceItemRowState> {
   constructor(props: IInvoiceItemRowProps) {
     super(props);
     this.handleClick = this.handleClick.bind(this);
@@ -53,4 +53,4 @@ class InvoiceItemRow extends React.Component<IInvoiceItemRowProps, IInvoiceItemR
   }
 }
 
-export default InvoiceItemRow;
+// export default InvoiceItemRow;

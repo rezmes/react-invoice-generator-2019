@@ -72,3 +72,17 @@
     }
   }
 }
+
+.invoiceSelect,
+ .header, .companyLogo, .itemsTable, .itemsTableHeader, .itemDescription,
+ .itemQuantity,
+ .itemPrice,
+ .itemTotal,
+ .addItem,
+ .inputWrapper,
+ .submitButton,
+ .fullWidthPlusButton,
+ .itemsTableFooter,
+ .itemsContainer{
+color: red
+}

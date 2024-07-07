@@ -60,15 +60,20 @@
 // }
 
 
-
-import { Version } from '@microsoft/sp-core-library';
-import { IPropertyPaneConfiguration, PropertyPaneTextField, PropertyPaneSlider } from '@microsoft/sp-webpart-base';
-import { BaseClientSideWebPart } from '@microsoft/sp-webpart-base';
 import * as React from 'react';
 import * as ReactDom from 'react-dom';
-import InvoiceGenerator from './components/InvoiceGenerator';
+import { Version } from '@microsoft/sp-core-library';
+import { BaseClientSideWebPart } from '@microsoft/sp-webpart-base';
+import {
+  IPropertyPaneConfiguration,
+  PropertyPaneTextField,
+  PropertyPaneSlider
+} from '@microsoft/sp-webpart-base';
+
+
+import {InvoiceGenerator} from './components/InvoiceGenerator';
 import { IInvoiceGeneratorProps } from './components/IInvoiceGeneratorProps';
-//import styles from './InvoiceGeneratorWebPart.module.scss';
+// import styles from './InvoiceGeneratorWebPart.module.scss';
 
 export interface IInvoiceGeneratorWebPartProps {
   logoImage: string;
