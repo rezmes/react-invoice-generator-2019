@@ -70,10 +70,8 @@ import {
   PropertyPaneSlider
 } from '@microsoft/sp-webpart-base';
 
-
-import {InvoiceGenerator} from './components/InvoiceGenerator';
-import { IInvoiceGeneratorProps } from './components/IInvoiceGeneratorProps';
-// import styles from './InvoiceGeneratorWebPart.module.scss';
+import InvoiceGenerator from './components/InvoiceGenerator';  // Adjust the path as necessary
+import { IInvoiceGeneratorProps } from './components/IInvoiceGeneratorProps'; // Ensure this path is correct
 
 export interface IInvoiceGeneratorWebPartProps {
   logoImage: string;
@@ -90,13 +88,13 @@ export default class InvoiceGeneratorWebPart extends BaseClientSideWebPart<IInvo
     const element: React.ReactElement<IInvoiceGeneratorProps> = React.createElement(
       InvoiceGenerator,
       {
+        context: this.context,
         logoImage: this.properties.logoImage,
         listId: this.properties.listId,
-        context: this.context,
         taxRate: this.properties.taxRate,
         companyName: this.properties.companyName,
         companyAddress: this.properties.companyAddress,
-        description: this.properties.description,
+        description: this.properties.description
       }
     );
 
@@ -106,10 +104,6 @@ export default class InvoiceGeneratorWebPart extends BaseClientSideWebPart<IInvo
   protected onDispose(): void {
     ReactDom.unmountComponentAtNode(this.domElement);
   }
-
-  // protected get dataVersion(): Version {
-  //   return Version.parse('1.0');
-  // }
 
   protected getPropertyPaneConfiguration(): IPropertyPaneConfiguration {
     return {

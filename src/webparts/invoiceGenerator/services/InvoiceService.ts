@@ -1,12 +1,9 @@
 import { WebPartContext } from "@microsoft/sp-webpart-base";
-import { sp, SPRest } from "@pnp/sp";
+import { sp, SPRest } from "@pnp/sp/presets/all";
 import "@pnp/sp/webs";
 import "@pnp/sp/lists";
 import "@pnp/sp/items";
-import "@pnp/sp/fields";
-import "@pnp/sp/views";
-import { IInvoice } from '../models/index';
-import { IList, IListInfo } from "@pnp/sp/lists";
+import { IInvoice } from '../models/index'; // Adjust the path as necessary
 
 export class InvoiceService {
   private spRest: SPRest;
@@ -18,53 +15,16 @@ export class InvoiceService {
     });
   }
 
-  public async getInvoice(listId: string): Promise<IInvoice[]> {
-    if (!listId) {
-      return null;
-    }
-
+  /**
+   * Fetches invoice items from the "InvoiceList".
+   */
+  public async getInvoices(): Promise<IInvoice[]> {
     try {
-      const items: IInvoice[] = await this.spRest.web.lists.getById(listId).items.select('ID', 'Title', 'billTo').get();
+      const items: IInvoice[] = await this.spRest.web.lists.getByTitle("InvoiceList").items.select('ID', 'Title', 'billTo').get();
       return items;
     } catch (error) {
       console.error('Error loading invoices:', error);
-      return null;
-    }
-  }
-
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  public async createList(listName: string): Promise<any> {
-    try {
-      // Create list
-      const createList = await this.spRest.web.lists.add(listName, "List created by Invoice Generator web part", 100, false, { OnQuickLaunch: true });
-      const field = await this.spRest.web.lists.getByTitle(listName).fields.addText("billTo");
-      // Return list ID
-      console.log(`List '${listName}' created with ID '${createList.data.Id}' and field '${field.data.InternalName}'.`);
-      await this.spRest.web.lists.getByTitle(listName).defaultView.fields.add("billTo");
-      return createList.data.Id;
-    } catch (error) {
-      console.log("Error creating list or field:", error);
-      return null;
-    }
-  }
-
-  public async getLists(): Promise<IListInfo[]> {
-    try {
-      const lists: IListInfo[] = await this.spRest.web.lists.select("Id", "Title").get();
-      return lists;
-    } catch (error) {
-      console.log(`Error retrieving lists: ${error}`);
-      return null;
-    }
-  }
-
-  public async listExists(listName: string): Promise<boolean> {
-    try {
-      const lists = await this.spRest.web.lists.filter(`Title eq '${listName}'`).get();
-      return lists.length > 0;
-    } catch (error) {
-      console.error('Error checking if list exists:', error);
-      return false;
+      return [];
     }
   }
 }
