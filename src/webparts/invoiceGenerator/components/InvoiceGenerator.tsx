@@ -1,62 +1,71 @@
-
 import * as React from 'react';
-import styles from './InvoiceGenerator.module.scss';
-import { IInvoiceGeneratorProps } from './IInvoiceGeneratorProps';
-import { escape } from '@microsoft/sp-lodash-subset';
-import { InvoiceHeader } from './InvoiceHeader/InvoiceHeader';
+import { WebPartContext } from "@microsoft/sp-webpart-base";
+import { IInvoice } from '../models/IInvoice'; // Ensure this path is correct
+import { InvoiceService } from '../services/InvoiceService'; // Ensure this path is correct
 
-export interface IInvoiceGeneratorState {
-  issueDate: Date;
-  dueDate: Date;
+interface IInvoiceGeneratorState {
+    invoices: IInvoice[];
+    isLoading: boolean;
+    error: string | null;
+}
+
+interface IInvoiceGeneratorProps {
+    context: WebPartContext;
+    // Include any other props you need to pass in
 }
 
 export default class InvoiceGenerator extends React.Component<IInvoiceGeneratorProps, IInvoiceGeneratorState> {
-  constructor(props: IInvoiceGeneratorProps) {
-    super(props);
+    constructor(props: IInvoiceGeneratorProps) {
+        super(props);
+        this.state = {
+            invoices: [],
+            isLoading: false,
+            error: null
+        };
+    }
 
-    this.state = {
-      issueDate: new Date(),
-      dueDate: new Date()
-    };
+    componentDidMount() {
+        this.loadInvoices();
+    }
 
-    this.handleIssueDateChange = this.handleIssueDateChange.bind(this);
-    this.handleDueDateChange = this.handleDueDateChange.bind(this);
-  }
+    async loadInvoices() {
+        const invoiceService = new InvoiceService(this.props.context);
+        this.setState({ isLoading: true });
+        try {
+            const invoices = await invoiceService.getInvoices();
+            this.setState({ invoices, isLoading: false });
+        } catch (error) {
+            console.error('Failed to load invoices:', error);
+            this.setState({ error: 'Failed to load invoices', isLoading: false });
+        }
+    }
 
-  handleIssueDateChange(date: Date): void {
-    this.setState({ issueDate: date });
-  }
+    render() {
+        const { invoices, isLoading, error } = this.state;
 
-  handleDueDateChange(date: Date): void {
-    this.setState({ dueDate: date });
-  }
+        if (isLoading) {
+            return <div>Loading...</div>;
+        }
 
-  render(): React.ReactElement<IInvoiceGeneratorProps> {
-    const { issueDate, dueDate } = this.state;
-    const { companyName, companyAddress, description } = this.props;
+        if (error) {
+            return <div>{error}</div>;
+        }
 
-    return (
-      <div className={styles.invoiceGenerator}>
-        <div className={styles.container}>
-          <div className={styles.row}>
-            <div className={styles.column}>
-              <InvoiceHeader
-                invoiceNumber={7}
-                customerName={'Customer Name'}
-                customerAddress={'Customer Address'}
-                amountdue={3}
-                companyName={companyName}
-                companyAddress={companyAddress}
-                issueDate={issueDate}
-                dueDate={dueDate}
-                onIssueDateChange={this.handleIssueDateChange}
-                onDueDateChange={this.handleDueDateChange}
-              />
-
+        return (
+            <div>
+                <h1>Invoice List</h1>
+                {invoices.length > 0 ? (
+                    <ul>
+                        {invoices.map(invoice => (
+                            <li key={invoice.ID}>
+                                {invoice.Title} - {invoice.billTo}
+                            </li>
+                        ))}
+                    </ul>
+                ) : (
+                    <p>No invoices found.</p>
+                )}
             </div>
-          </div>
-        </div>
-      </div>
-    );
-  }
+        );
+    }
 }
