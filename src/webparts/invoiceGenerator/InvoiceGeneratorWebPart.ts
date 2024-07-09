@@ -74,6 +74,7 @@ import InvoiceGenerator from './components/InvoiceGenerator';  // Adjust the pat
 import { IInvoiceGeneratorProps } from './components/IInvoiceGeneratorProps'; // Ensure this path is correct
 
 export interface IInvoiceGeneratorWebPartProps {
+  context: any;
   logoImage: string;
   listId: string;
   taxRate: number;
